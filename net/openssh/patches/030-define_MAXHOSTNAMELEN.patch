@@ -1,0 +1,13 @@
+--- a/defines.h
++++ b/defines.h
+@@ -133,7 +133,10 @@ enum
+ #  define HOST_NAME_MAX MAXHOSTNAMELEN
+ # else
+ #  define HOST_NAME_MAX	255
++#  define MAXHOSTNAMELEN HOST_NAME_MAX 
+ # endif
++#else
++# define MAXHOSTNAMELEN HOST_NAME_MAX 
+ #endif /* HOST_NAME_MAX */
+ 
+ #if defined(HAVE_DECL_MAXSYMLINKS) && HAVE_DECL_MAXSYMLINKS == 0
