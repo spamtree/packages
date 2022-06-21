@@ -9,4 +9,12 @@ config OPENSSH_LIBFIDO2
 		namely `ecdsa_sk` and `ed25519_sk`. These two methods make use
 		of hardware keys that implement the FIDO and FIDO2 protocols.
 		In order to use these two types, libfido2 is required.
+
+config OPENSSH_KERBEROS
+        bool
+        default y
+        prompt "Include Kerberos (krb5) support in OpenSSH"
+        help
+            Kerberos (krb5) support in OpenSSH.
+
 endif

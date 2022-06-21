@@ -31,7 +31,7 @@ include $(INCLUDE_DIR)/package.mk
 define Package/openssh/Default
 	SECTION:=net
 	CATEGORY:=Network
-	DEPENDS:=+libopenssl +zlib
+	DEPENDS:=+libopenssl +zlib +OPENSSH_KERBEROS:krb5-libs +OPENSSH_KERBEROS:libcomerr
 	TITLE:=OpenSSH
 	MAINTAINER:=Peter Wagner <tripolar@gmx.at>
 	URL:=http://www.openssh.com/
@@ -170,11 +170,18 @@ CONFIGURE_ARGS += \
 	--disable-wtmp \
 	--disable-wtmpx \
 	--without-bsd-auth \
-	--without-kerberos5 \
 	--with-stackprotect \
 	--with$(if $(CONFIG_OPENSSL_ENGINE),,out)-ssl-engine \
 	--with$(if $(CONFIG_OPENSSH_LIBFIDO2),,out)-security-key-builtin
 	
+ifeq ($(CONFIG_OPENSSH_KERBEROS),y)
+CONFIGURE_ARGS += \
+        --with-kerberos5=$(STAGING_DIR)/usr/lib 
+else
+CONFIGURE_ARGS += \
+	--without-kerberos5
+endif
+
 ifeq ($(BUILD_VARIANT),with-pam)
 CONFIGURE_ARGS += \
 	--with-pam

@@ -92,7 +92,9 @@ CONFIGURE_ARGS += \
 	--disable-rpath \
 	--disable-pkinit \
 	--with-size-optimizations \
-	--with-crypto-impl=builtin
+	--with-crypto-impl=builtin \
+	--with-spake-openssl
+
 
 define Build/InstallDev
 	$(INSTALL_DIR) $(1)/usr/include
